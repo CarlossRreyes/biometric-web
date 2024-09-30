@@ -1,0 +1,114 @@
+<!-- TODO: BACKUP INSTITUTION -->
+<ng-container *ngIf="institutionCountryCity$ | async as institutionCountryCity; else skeleton">
+    <div class="col-12 xl:col-12" *ngIf="institutionCountryCity.length > 0">
+      <div class="card">
+        <span class="block text-900 font-bold mb-3">Instituciones</span>
+        <p-table 
+          [value]="institutionCountryCity" 
+          responsiveLayout="scroll" [paginator]="true" [rows]="4"
+          
+        >
+  
+          <ng-template pTemplate="caption">
+            <div class="flex">
+              <button pButton label="Nuevo" class="p-button-outlined" icon="pi pi-database"
+                (click)="showNewInstituteDialog()">
+              </button>
+              <span class="p-input-icon-left ml-auto">
+                <i class="pi pi-search"></i>
+                <input pInputText type="text" placeholder="Buscar institución" />
+              </span>
+            </div>
+          </ng-template>
+          <ng-template pTemplate="header" let-columns>
+            <tr >
+              <th>ID</th>
+              <th>Nombre</th>
+              <th>País</th>
+              <th>Provincia</th>
+              <th>Ciudad</th>
+              <th>Estado</th>
+              <th>Acción</th>
+            </tr>
+          </ng-template>
+  
+          <ng-template pTemplate="body" let-data let-columns="columns">
+            <tr >
+              <td>{{ data.id }}</td>
+              <td >{{ data.nombre }}</td>
+              <td >
+                <ng-container *ngIf="data.institucion_pais_ciudad.length > 0;">
+                  <ng-container *ngFor="let p of data.institucion_pais_ciudad;">
+                    <ng-container *ngIf="p.pais">
+                      <img src="assets/banderas/{{ p.pais.imagen }}" class="shadow-4" alt="none" width="20">
+                      {{ p.pais.nombre_pais | titlecase }}
+                    </ng-container>
+                  </ng-container>
+                </ng-container>
+              </td>
+  
+              <td >
+                <ng-container *ngIf="data.institucion_pais_ciudad.length > 0;">
+                  <ng-container *ngFor="let pr of data.institucion_pais_ciudad;">
+                    <ng-container *ngIf="pr.provincia">
+                      {{ pr.provincia.nombre_provincia | titlecase }}
+                    </ng-container>
+                  </ng-container>
+                </ng-container>
+              </td>
+  
+              <td >
+                <ng-container *ngIf="data.institucion_pais_ciudad.length > 0;">
+                  <ng-container *ngFor="let c of data.institucion_pais_ciudad;">
+                    <ng-container *ngIf="c.ciudad">
+                      {{ c.ciudad.nombre_ciudad | titlecase }}
+                    </ng-container>
+                  </ng-container>
+                </ng-container>
+              </td>
+  
+              <td ><p-tag [value]="data.estado == 'A' ? 'Activa': 'Inactiva'" [severity]="getSeverity(data.estado)"></p-tag></td>
+              <!-- <td style="text-align: justify;">{{ data.estado }}</td> -->
+              <td>
+  
+                <div class=" formgrid grid ">
+                  <div class="field col-12 sm:col-12 md:col-12 lg:col-6 text-center ">
+                    <p-button (click)="showEditInstituteDialog(data)" class="" icon="pi pi-file-edit"
+                      styleClass="p-button-raised p-button-rounded p-button-secondary p-button-text">
+                    </p-button>
+  
+                  </div>
+                  <div class="field col-12 sm:col-12 md:col-12 lg:col-6 text-center">
+                    <p-button icon="pi pi-trash"
+                      styleClass="p-button-raised p-button-danger p-button-rounded p-button-text">
+                    </p-button>
+  
+                  </div>
+  
+  
+                </div>
+                <!-- <div class="grid align-items-center">
+                  <div class="col-6 ml-3">
+                    <div class="text-center">
+                    </div>
+                  </div>
+                  <div class="col-6">
+                    <div class="text-center">
+                      <p-button icon="pi pi-trash"
+                        styleClass="p-button-raised p-button-danger p-button-rounded p-button-text">
+                      </p-button>
+                    </div>
+                  </div>
+                </div> -->
+              </td>
+            </tr>
+          </ng-template>
+        </p-table>
+      </div>
+    </div>
+  </ng-container>
+  
+  
+  <ng-template #skeleton>
+    <app-skeleton-table></app-skeleton-table>
+  </ng-template>

@@ -1,0 +1,124 @@
+<app-breadcrumb [listaUrl]="listaUrl"></app-breadcrumb>
+
+<div class="container text-center">
+
+    
+    <div class="row">
+        <form [formGroup]="formAP">
+            <div class="row">
+       <!--          <div class="col-3">
+                    <mat-form-field appearance="outline" class="example-full-width">
+                        <mat-label>Puntuales y atrasados</mat-label>
+                        <mat-select formControlName="tipo_atrasado_asistencia">
+                            <mat-option>-- Seleccione un tipo --</mat-option>
+                            <mat-option *ngFor="let u of listAtrasadoPuntuales" [value]="u.type">
+                                {{u.name }}
+                            </mat-option>
+                        </mat-select>
+                        <mat-error *ngIf="formAP.get('tipo_atrasado_asistencia')?.errors?.['required']">
+                            El usuario es obligatorio
+                        </mat-error>
+                    </mat-form-field>
+                </div> -->
+                <div class="col-3">
+                    <mat-form-field class="widthMatFormField" appearance="outline">
+                        <mat-label>Fecha inicio</mat-label>
+                        <input matInput formControlName="fecha_inicio" type="date"
+                            [ngClass]="{ 'is-invalid': fieldsValidate('fecha_inicio') }">
+                        <mat-error
+                            *ngIf="formAP.get('fecha_inicio')?.errors?.['required']">
+                            La fecha inicio es requerida. </mat-error>
+                    </mat-form-field>
+                
+                </div>
+                <div class="col-3">
+                    <mat-form-field class="widthMatFormField" appearance="outline">
+                        <mat-label>Fecha fin</mat-label>
+                        <input matInput formControlName="fecha_fin" type="date"
+                            [ngClass]="{ 'is-invalid': fieldsValidate('fecha_fin') }">
+                        <mat-error
+                            *ngIf="formAP.get('fecha_fin')?.errors?.['required']">
+                            La fecha final es requerida. </mat-error>
+                    </mat-form-field>
+    
+    
+                </div>
+                <div class="col-3">
+                  <button (click)="consultar()" class="btn btn btn-outline-primary d-grid mt-2">
+                    <i class="fa fa-plus"></i>Consultar
+                  </button>
+                </div>
+            </div>
+        </form>
+    </div>
+
+    <div class="col-md-12">
+        <!-- cabecera -->
+        <img src="assets/img/logo.png" alt="">
+        
+        
+    </div>
+
+    <div class="row">
+        <div class="col-md-6">Fecha de consulta : {{ formAP.get('fecha')?.value | date: 'yyyy-MM-dd' }}</div>
+        <div class="col-md-6">Hora de consulta: {{ formAP.get('fecha')?.value | date:'hh:mm a' }}</div>
+    </div>
+
+    <br>
+
+    <div >
+        <div>
+            <div >
+                <table mat-table [dataSource]="dataSourceAtrasadosPuntualesxAsistenciaResponse" multiTemplateDataRows matSort>
+            
+                    <ng-container matColumnDef="id">
+                    <th mat-header-cell *matHeaderCellDef> N° </th>
+                    <td mat-cell *matCellDef="let element; let i = dataIndex;"> {{ i+1 }} </td>
+                    </ng-container>
+
+                    <ng-container matColumnDef="id_usuario">
+                        <th mat-header-cell *matHeaderCellDef> ID </th>
+                        <td mat-cell *matCellDef="let element"> {{ element.user_id  }}</td>
+                    </ng-container>
+
+                    <ng-container matColumnDef="usuario">
+                        <th mat-header-cell *matHeaderCellDef> Usuario </th>
+                        <td mat-cell *matCellDef="let element"> {{ element.usuarios  }}</td>
+                    </ng-container>
+
+                    <ng-container matColumnDef="tipo">
+                        <th mat-header-cell *matHeaderCellDef> Tipo </th>
+                        <td mat-cell *matCellDef="let element"> {{ element.tipo  }}</td>
+                    </ng-container>
+
+                    <ng-container matColumnDef="tipoAsistencia">
+                        <th mat-header-cell *matHeaderCellDef> Tipo asistencia </th>
+                        <td mat-cell *matCellDef="let element"> {{ element.tipoAsistencia  }}</td>
+                    </ng-container>
+
+                    <ng-container matColumnDef="fecha">
+                        <th mat-header-cell *matHeaderCellDef> Fecha </th>
+                        <td mat-cell *matCellDef="let element"> {{ element.fecha  }}</td>
+                    </ng-container>
+
+                    <ng-container matColumnDef="hora">
+                        <th mat-header-cell *matHeaderCellDef> Hora </th>
+                        <td mat-cell *matCellDef="let element"> {{ element.hora  }}</td>
+                    </ng-container>
+
+
+                    
+                    <tr mat-header-row *matHeaderRowDef="columnsToDisplayWithExpandUsersResponse"></tr>
+                    <tr mat-row *matRowDef="let row; columns: columnsToDisplayWithExpandUsersResponse;"></tr>
+                </table>
+                <!-- <mat-paginator #MatPaginatorUsersResponse [pageSizeOptions]="[5, 10, 25, 100]"></mat-paginator> -->
+            </div>
+        </div>
+
+    
+    
+    
+    </div>
+
+</div>
+

@@ -1,0 +1,180 @@
+<ng-container *ngIf="institutionCountryCity$ | async as institutionCountryCity; else skeleton">
+    <div class="col-12 xl:col-12" *ngIf="institutionCountryCity.length > 0">
+      <div class="card">
+        <span class="block text-900 font-bold mb-3">Instituciones</span>
+        <p-treeTable 
+          #tt
+          [value]="groupData"
+          [rows]="5" [rowsPerPageOptions]="[5 ,10, 25, 50]" [showCurrentPageReport]="true"
+          [tableStyle]="{'min-width':'50rem'}"
+          [columns]="cols" sortMode="multiple" [scrollable]="true" [paginator]="true"
+        >
+  
+          <ng-template pTemplate="header" let-columns>
+            <tr class="flex justify-content-between">
+              <th style="min-width: 8rem;" *ngFor="let col of columns">
+                {{ col.header }}
+              </th>
+            </tr>
+            <tr>
+              <th *ngFor="let col of cols">
+                <input pInputText type="text" placeholder="Buscar....."
+                
+                />
+              </th>
+            </tr>
+          </ng-template>
+  
+          <ng-template pTemplate="header">
+              <tr>
+                <th>País</th>
+                <!-- <th>Institución</th> -->
+                <th>Provincia</th>
+                <!-- <th>Ciudad</th> -->
+                        
+              </tr>
+          </ng-template>
+          <ng-template pTemplate="body" let-rowNode let-rowData="rowData" let-columns="columns">
+              <tr >
+                  <!-- <td>
+                      <p-treeTableToggler [rowNode]="rowNode"></p-treeTableToggler>
+                      {{ rowData.name }}
+                  </td> -->
+                  <td *ngFor="let col of columns; let i = index">
+                    <p-treeTableToggler [rowNode]="rowNode" *ngIf="i === 0"></p-treeTableToggler>
+          
+                    <div class="flex justify-content-between">
+                      {{ rowData[col.field] }}
+                    </div>
+                  </td>
+              </tr>
+          </ng-template>
+      </p-treeTable>
+       
+      </div>
+    </div>
+  </ng-container>
+  
+  
+  <ng-template #skeleton>
+    <app-skeleton-table></app-skeleton-table>
+  </ng-template>
+
+
+
+
+  TODO: MIO 
+
+
+  import { Component, OnDestroy, OnInit, ViewChild } from '@angular/core';
+import { Observable, Subject, of, takeUntil } from 'rxjs';
+import { IntitutionCountryCity } from '../../../interface/institution-country-city.interface';
+import { DialogService, DynamicDialogRef } from 'primeng/dynamicdialog';
+import { InstitutionService } from '../../../service/institution.service';
+import { CreateInstitutionComponent } from '../../institution/create-institution/create-institution.component';
+import { InstituteCountry } from '../../../interface/institution';
+import { Country } from './../../../interface/country.interface';
+
+import { TreeNode } from 'primeng/api';
+import { Table } from 'primeng/table';
+
+interface Column {
+  field: string;
+  header: string;
+}
+
+@Component({
+  selector: 'app-crud-institutions',
+  templateUrl: './crud-institutions.component.html',
+  styleUrls: ['./crud-institutions.component.scss']
+})
+export class CrudInstitutionsComponent implements OnInit, OnDestroy {
+  ref: DynamicDialogRef | undefined;
+
+  groupData: any[] = [];
+
+  files!: TreeNode[];
+  cols!: Column[];
+
+  @ViewChild('dt') dt!: Table;
+
+  institutionCountryCity$: Observable<IntitutionCountryCity[]> = of([]);
+  private unsubscribeGeneral$: Subject<void> = new Subject();
+
+  constructor(
+    public dialogService: DialogService,
+    private _is : InstitutionService
+
+  ){
+
+  }
+
+  ngOnInit(): void {
+    this.getInstitutionCountCity();
+
+    this.cols = [
+      { field: 'name', header: 'País' },
+      // { field: 'imagen', header: 'Imagen' },
+      // { field: 'nombre_institution', header: 'Institución' },
+      { field: 'nombre_provincia', header: 'Provincia' },
+      // { field: 'nombre_ciudad', header: 'Ciudad' },
+    ];
+    
+  }
+
+  ngOnDestroy(): void {
+    this.unsubscribeGeneral$.unsubscribe();
+  }
+
+
+  //******Data Institute********/
+  getInstitutionCountCity(){
+    this.institutionCountryCity$ = this._is.getInstitutionCountryCity().pipe(takeUntil(this.unsubscribeGeneral$));
+    
+    this.institutionCountryCity$.subscribe({
+      next: ( resp ) => {
+        if( resp.length > 0 ){
+          this.groupData = this._is.groupData( resp );
+        }else{
+          this.groupData = [];
+          
+        }
+      }
+    })
+  }
+
+  showNewInstituteDialog(){
+    this.ref = this.dialogService.open(CreateInstitutionComponent, {
+      header: 'Crear Institucion',
+      width: '50%',
+      contentStyle: { overflow: 'auto' },
+      baseZIndex: 10000,
+      maximizable: false
+    });
+  }
+
+  showEditInstituteDialog( institute: IntitutionCountryCity ){
+    this.ref = this.dialogService.open( CreateInstitutionComponent , {
+      header: 'Editar Institucion',
+      data : institute,
+      width: '50%',
+      contentStyle: { overflow: 'auto' },
+      baseZIndex: 10000,
+      maximizable: false
+    });
+  }
+
+  getSeverity(state: string) {
+    switch (state) {
+      case 'A':
+          
+          return 'success';
+      // case 'LOWSTOCK':
+      //     return 'warning';
+      case 'I':
+          return 'danger';
+      default: return 'warning'
+    }
+  }
+
+}

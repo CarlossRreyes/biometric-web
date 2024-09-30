@@ -1,0 +1,140 @@
+<app-breadcrumb [listaUrl]="listaUrl"></app-breadcrumb>
+
+
+<div class="container text-center">
+
+    <div class="row">
+        <form [formGroup]="formAD">
+            <div class="row">
+                <div class="col-3">
+                    <mat-form-field appearance="outline" class="example-full-width">
+                        <mat-label>Usuarios</mat-label>
+                        <mat-select formControlName="usuario_id">
+                            <mat-option>-- Seleccione un usuario --</mat-option>
+                            <mat-option *ngFor="let u of listaUsuarios" [value]="u.id">
+                                {{u.persona.nombres | titlecase }} {{u.persona.nombres | titlecase }} - {{u.rol.cargo | titlecase}}
+                            </mat-option>
+                        </mat-select>
+                        <mat-error *ngIf="formAD.get('usuario_id')?.errors?.['required']">
+                            El usuario es obligatorio
+                        </mat-error>
+                    </mat-form-field>
+                </div>
+                <div class="col-3">
+                    <mat-form-field class="widthMatFormField" appearance="outline">
+                        <mat-label>Fecha inicio</mat-label>
+                        <input matInput formControlName="fecha_inicio" type="date"
+                            [ngClass]="{ 'is-invalid': fieldsValidate('fecha_inicio') }">
+                        <mat-error
+                            *ngIf="formAD.get('fecha_inicio')?.errors?.['required']">
+                            La fecha inicio es requerida. </mat-error>
+                    </mat-form-field>
+                
+                </div>
+                <div class="col-3">
+                    <mat-form-field class="widthMatFormField" appearance="outline">
+                        <mat-label>Fecha fin</mat-label>
+                        <input matInput formControlName="fecha_fin" type="date"
+                            [ngClass]="{ 'is-invalid': fieldsValidate('fecha_fin') }">
+                        <mat-error
+                            *ngIf="formAD.get('fecha_fin')?.errors?.['required']">
+                            La fecha final es requerida. </mat-error>
+                    </mat-form-field>
+    
+    
+                </div>
+                <div class="col-3">
+                  <button (click)="consultar()" class="btn btn btn-outline-primary d-grid mt-2">
+                    <i class="fa fa-plus"></i>Consultar
+                  </button>
+                </div>
+            </div>
+        </form>
+    </div>
+
+    <!--data-->
+
+
+    <ng-container *ngIf="asistenciaXdepartamento.length > 0">
+        <div class="col-md-12">
+            <!-- cabecera -->
+            <img src="assets/img/logo.png" alt="">
+            <h1>{{ formAD.get('usuario')?.value | titlecase}}</h1>
+            
+            
+        </div>
+
+        <div class="row">
+            <div class="col-md-6">Fecha de consulta : {{ formAD.get('fecha')?.value | date: 'yyyy-MM-dd' }}</div>
+            <div class="col-md-6">Hora de consulta: {{ formAD.get('fecha')?.value | date:'hh:mm a' }}</div>
+        </div>
+
+        <br>
+
+        <div >
+            <div>
+                <div >
+                    <table mat-table [dataSource]="dataSourceAsistenciaxDepartamentoResponse" multiTemplateDataRows matSort>
+                
+                        <ng-container matColumnDef="id">
+                        <th mat-header-cell *matHeaderCellDef> N° </th>
+                        <td mat-cell *matCellDef="let element; let i = dataIndex;"> {{ i+1 }} </td>
+                        </ng-container>
+
+                        <ng-container matColumnDef="fecha">
+                            <th mat-header-cell *matHeaderCellDef> Fecha </th>
+                            <td mat-cell *matCellDef="let element"> {{ element.fecha  }}</td>
+                        </ng-container>
+
+                        <ng-container matColumnDef="hora">
+                            <th mat-header-cell *matHeaderCellDef> Hora </th>
+                            <td mat-cell *matCellDef="let element"> {{ element.hora  }}</td>
+                        </ng-container>
+
+                        <ng-container matColumnDef="tipo_asistencia">
+                            <th mat-header-cell *matHeaderCellDef> Tipo asistencia </th>
+                            <td mat-cell *matCellDef="let element"> {{ element.tipo_asistencia.type  }}</td>
+                        </ng-container>
+
+                        <ng-container matColumnDef="tipo_registro">
+                            <th mat-header-cell *matHeaderCellDef> Tipo registro </th>
+                            <td mat-cell *matCellDef="let element"> {{ element.tipo_registro.tipo  }}</td>
+                        </ng-container>
+
+                        <ng-container matColumnDef="asistencias_departamento">
+                            <th mat-header-cell *matHeaderCellDef > {{ name_type }} </th>
+                            <td mat-cell *matCellDef="let element"> 
+                                
+                                <ng-container *ngIf="element.asistencia_evento.length > 0">
+                                    <b *ngFor="let ae of element.asistencia_evento" style="font-size: 12px;">{{ ae.evento.nombre | titlecase }}</b>
+                                </ng-container>
+                                <ng-container *ngIf="element.asistencias_departamento.length > 0">
+                                    <b  *ngFor="let ad of element.asistencias_departamento" style="font-size: 12px;">{{ ad.departamento.nombre | titlecase }}</b>
+                                </ng-container>
+                                
+                                <!-- {{ element.nombre }} -->
+                            
+                            </td>
+                        </ng-container>
+                        
+                        <tr mat-header-row *matHeaderRowDef="columnsToDisplayWithExpandUsersResponse"></tr>
+                        <tr mat-row *matRowDef="let row; columns: columnsToDisplayWithExpandUsersResponse;"></tr>
+                    </table>
+                    <!-- <mat-paginator #MatPaginatorUsersResponse [pageSizeOptions]="[5, 10, 25, 100]"></mat-paginator> -->
+                </div>
+            </div>
+
+        
+        
+        
+        </div>
+
+    </ng-container>
+
+        
+
+
+
+</div>
+
+

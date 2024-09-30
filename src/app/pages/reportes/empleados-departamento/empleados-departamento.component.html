@@ -1,0 +1,88 @@
+<app-breadcrumb [listaUrl]="listaUrl"></app-breadcrumb>
+
+
+<div class="container text-center">
+    <div class="row">
+        <form [formGroup]="formRED">
+            <div class="col">
+                <mat-form-field appearance="outline" class="example-full-width">
+                    <mat-label>Departamento</mat-label>
+                    <mat-select formControlName="departamento_id">
+                        <mat-option>-- Seleccione un Departamento --</mat-option>
+                        <mat-option *ngFor="let d of listaDepartamento" [value]="d.id">
+                            {{d.nombre | titlecase}}
+                        </mat-option>
+                    </mat-select>
+                    <mat-error *ngIf="formRED.get('departamento_id')?.errors?.['required']">
+                        El departamento es obligatorio
+                    </mat-error>
+                </mat-form-field>
+            </div>
+        </form>
+    </div>
+    
+    <ng-container *ngIf="listaUsersResponse.length > 0">
+      <div class="col-md-12">
+        <!-- cabecera -->
+        <img src="assets/img/logo.png" alt="">
+        <h1>{{ formRED.get('nombreDepartamento')?.value}}</h1>
+        
+      </div>
+
+      <div class="row">
+          <div class="col-md-6">fecha de consulta : {{ formRED.get('fecha')?.value | date: 'yyyy-MM-dd' }}</div>
+          <div class="col-md-6">hora de consulta: {{ formRED.get('fecha')?.value | date:'hh:mm a' }}</div>
+      </div>
+
+      <div class="row col-12" *ngIf="listaUsersResponse.length > 0">
+          <div class="col-md-12 ">
+            <div class="row">
+              <div class="col-lg-7 mt-2 "> </div>
+      
+                  <div class="col-lg-5 d-flex justify-content-end">
+                    <mat-form-field appearance="standard" class="d-flex justify-content-end">
+                      <mat-label>Buscar...</mat-label>
+                      <input matInput (keyup)="applyFilterUsersResponse($event)" placeholder="Ej. Mia" #inputUsersResponse>
+                    </mat-form-field>
+                  </div>
+            </div>
+          </div>
+  
+          <div class="mt-3" >
+            <table mat-table [dataSource]="dataSourceUsersResponse" multiTemplateDataRows matSort>
+      
+              <ng-container matColumnDef="id">
+                <th mat-header-cell *matHeaderCellDef> N° </th>
+                <td mat-cell *matCellDef="let element; let i = dataIndex;"> {{ i+1 }} </td>
+              </ng-container>
+      
+              <ng-container matColumnDef="empleado">
+                <th mat-header-cell *matHeaderCellDef> Empleados </th>
+                <td mat-cell *matCellDef="let element"> {{ element.persona.nombres | titlecase }}</td>
+              </ng-container>
+      
+              <ng-container matColumnDef="cargo">
+                <th mat-header-cell *matHeaderCellDef> Cargo </th>
+                <td mat-cell *matCellDef="let element"> {{ element.rol.cargo | titlecase }}</td> 
+              </ng-container>
+      
+              <ng-container matColumnDef="sexo">
+                <th mat-header-cell *matHeaderCellDef> Sexo </th>
+                <td mat-cell *matCellDef="let element"> {{ element.persona.sexo.detalle  | titlecase }}</td>
+              </ng-container>
+      
+              <tr mat-header-row *matHeaderRowDef="columnsToDisplayWithExpandUsersResponse"></tr>
+              <tr mat-row *matRowDef="let row; columns: columnsToDisplayWithExpandUsersResponse;"></tr>
+      
+              <tr class="mat-row" *matNoDataRow>
+                <td class="mat-cell" colspan="4">No hay registros "{{inputUsersResponse.value}}"</td>
+              </tr>
+            </table>
+            <mat-paginator #MatPaginatorUsersResponse [pageSizeOptions]="[5, 10, 25, 100]"></mat-paginator>
+          </div>
+    </div>
+
+  </ng-container>
+    
+
+</div>

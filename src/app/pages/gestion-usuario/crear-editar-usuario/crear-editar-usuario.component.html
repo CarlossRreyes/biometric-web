@@ -1,0 +1,129 @@
+
+<div class="container">
+  <h2 mat-dialog-title>{{ listadoSeleccionado ? "Actualizar la Información Del Usuario" : "Ingresar Nueva Información Del Usuario" }}</h2>
+
+  <form [formGroup]="formUsuario" class="example-form row mt-3">
+
+    <div class="col-12">
+      <div style="display: flex; justify-content: center; padding: 5px" class="mt-2">
+        <ngx-dropzone ngx-dropzone [accept]="'image/*'" [multiple]="false" (change)="onSelect($event)">
+          <ngx-dropzone-label class="custom-dropzone">
+            &nbsp; Ingrese una Imagen &nbsp;
+          </ngx-dropzone-label>
+          <ngx-dropzone-image-preview ngProjectAs="ngx-dropzone-preview" *ngFor="let f of files"
+            [file]="f" [removable]="true" (removed)="onRemove(f)">
+          </ngx-dropzone-image-preview>
+        </ngx-dropzone>
+      </div>
+    </div>
+ 
+    <div class="col-md-6">
+      <mat-form-field class="example-full-width" appearance="outline">
+        <mat-label>Cédula</mat-label>
+        <input matInput formControlName="cedula" maxlength="10" type="text" appCedula appNumericOnlyDirective [ngClass]="{ 'is-invalid': fieldsValidate('cedula') }">
+          <mat-error *ngIf="formUsuario.get('cedula')?.errors?.['required']"> La cédula es requerido. </mat-error>
+          <mat-error *ngIf="formUsuario.get('cedula')?.errors?.['cedula']"> Ingrese una cédula válida. </mat-error>
+      </mat-form-field> 
+    </div>
+
+    <div class="col-md-6">
+      <mat-form-field class="example-full-width" appearance="outline">
+        <mat-label>Rol</mat-label>
+        <mat-select formControlName="rol_id" [ngClass]="{ 'is-invalid': fieldsValidate('rol_id') }">
+          <mat-option>-- Seleccione un Rol--</mat-option>
+          <mat-option *ngFor="let lr of listaRoles" [value]="lr.id"> {{ lr.cargo | titlecase }}</mat-option>
+        </mat-select>
+        <mat-error *ngIf="formUsuario.get('rol_id')?.errors?.['required']"> El rol es requerido. </mat-error>
+      </mat-form-field>
+    </div>
+
+    <div class="col-md-6">
+      <mat-form-field class="example-full-width" appearance="outline">
+        <mat-label>Usuario</mat-label>
+        <input matInput formControlName="name" type="text" [ngClass]="{ 'is-invalid': fieldsValidate('name') }" appAlphaNumeric>
+        <mat-error *ngIf="formUsuario.get('name')?.errors?.['required']"> El usuario es requerido. </mat-error>
+        <mat-error *ngIf="formUsuario.controls['name']?.errors?.['minlength']"> El usuario debe tener mínimo 3 caracteres. </mat-error>
+      </mat-form-field>
+    </div>
+
+    <div class="col-md-6">
+      <mat-form-field class="example-full-width" appearance="outline">
+        <mat-label>{{ listadoSeleccionado ? "Nueva Contraseña" : "Contraseña" }}</mat-label>
+        <input matInput [type]="hide ? 'password' : 'text'" formControlName="password" [ngClass]="{ 'is-invalid': fieldsValidate('password') }">
+        <button mat-icon-button matSuffix (click)="hide = !hide" [attr.aria-pressed]="hide">
+          <mat-icon>{{hide ? 'visibility_off' : 'visibility'}}</mat-icon>
+        </button>
+        <mat-error *ngIf="formUsuario.get('password')?.errors?.['required']"> La contraseña es requerida. </mat-error> 
+        <mat-error *ngIf="formUsuario.controls['password']?.errors?.['minlength']"> La contraseña debe tener mínimo 6 caracteres. </mat-error>                   
+      </mat-form-field>
+    </div>
+
+    <div class="col-md-6">
+      <mat-form-field class="example-full-width" appearance="outline">
+        <mat-label>Nombre</mat-label>
+        <input matInput formControlName="nombres" type="text" [ngClass]="{ 'is-invalid': fieldsValidate('nombres') }" appLetters>
+          <mat-error *ngIf="formUsuario.get('nombres')?.errors?.['required']"> El nombre es requerido. </mat-error>
+          <mat-error *ngIf="formUsuario.controls['nombres']?.errors?.['minlength']"> El nombre debe tener mínimo 3 caracteres. </mat-error> 
+      </mat-form-field>
+    </div>
+
+    <div class="col-md-6">
+      <mat-form-field class="example-full-width" appearance="outline">
+        <mat-label>Apellidos</mat-label>
+        <input matInput formControlName="apellidos" type="text" [ngClass]="{ 'is-invalid': fieldsValidate('apellidos') }" appLetters>
+          <mat-error *ngIf="formUsuario.get('apellidos')?.errors?.['required']"> El apellido es requerido. </mat-error>
+          <mat-error *ngIf="formUsuario.controls['apellidos']?.errors?.['minlength']"> El apellido debe tener mínimo 3 caracteres. </mat-error> 
+      </mat-form-field>
+    </div>
+
+    <div class="col-md-6">
+      <mat-form-field class="example-full-width" appearance="outline">
+        <mat-label>Correo</mat-label>
+        <input matInput formControlName="email" type="email" [ngClass]="{ 'is-invalid': fieldsValidate('email') }" appEmailValidation>
+        <mat-error *ngIf="formUsuario.get('email')?.errors?.['required']"> El correo es requerido. </mat-error>
+        <mat-error *ngIf="formUsuario.get('email')?.invalid"> El correo no tiene formato correcto. </mat-error>
+      </mat-form-field>
+    </div>
+
+    <div class="col-md-6">
+      <mat-form-field class="example-full-width" appearance="outline">
+        <mat-label>N° Celular</mat-label>
+        <input matInput formControlName="num_celular" maxlength="10" type="num_celular" appNumerosEcuadorPhone appNumericOnlyDirective 
+            [ngClass]="{ 'is-invalid': fieldsValidate('apellidos') }" >
+          <mat-error *ngIf="formUsuario.get('num_celular')?.errors?.['required']"> El número celular es requerido. </mat-error>
+          <mat-error *ngIf="formUsuario.controls['num_celular']?.errors?.['minlength']"> El número celular debe tener mínimo 10 caracteres. </mat-error>
+          <mat-error *ngIf="formUsuario.get('num_celular')?.errors?.['ecuadorianPhone']"> El número de celular ingresado no es válido. </mat-error>
+      </mat-form-field>
+    </div>
+
+    <div class="col-md-6">
+      <mat-form-field class="example-full-width" appearance="outline">
+        <mat-label>Dirección</mat-label>
+        <input matInput formControlName="direccion" type="text">
+      </mat-form-field>
+    </div> 
+
+    <div class="col-md-6">
+      <mat-form-field class="example-full-width" appearance="outline">
+        <mat-label>Sexo</mat-label>
+        <mat-select formControlName="sexo_id" [ngClass]="{ 'is-invalid': fieldsValidate('sexo_id') }">
+          <mat-option>-- Seleccione un Sexo--</mat-option>
+          <mat-option *ngFor="let lr of listaSexo" [value]="lr.id"> {{ lr.detalle | titlecase }}</mat-option>
+        </mat-select>
+        <mat-error *ngIf="formUsuario.get('sexo_id')?.errors?.['required']"> El sexo es requerido. </mat-error>
+      </mat-form-field>
+    </div>
+    
+    
+  </form>
+  
+  <div class="row">
+    <mat-dialog-actions align="center">
+      <button mat-button mat-dialog-close class="d-grid" mat-flat-button (click)="close()">Cancelar</button>
+      <button mat-button [mat-dialog-close]="true" cdkFocusInitial class="d-grid" mat-flat-button color="primary"
+              [disabled]="formUsuario.invalid" (click)="updateSaveUsuario()">
+        {{ listadoSeleccionado ? "Actualizar" : "Registrar" }}
+      </button>
+    </mat-dialog-actions>
+  </div>
+</div>

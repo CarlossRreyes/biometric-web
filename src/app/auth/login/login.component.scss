@@ -1,0 +1,16 @@
+
+
+.img-fluid { height : 300px; }
+ 
+.br { border-radius: 20px; }
+
+.bg-login { 
+    /* background: url("../../../assets2/img/bg-xtrim.jpeg") no-repeat center center fixed; */ 
+    background: url("../../../assets/img/news-2.jpg") no-repeat center center fixed; 
+
+    -webkit-background-size: cover;
+    -moz-background-size: cover;
+    -o-background-size: cover;
+    background-size: cover;
+    overflow: show;   
+}

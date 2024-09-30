@@ -1,0 +1,364 @@
+{
+    "status": true,
+    "message": "Existen datos",
+    "data": [
+        {
+            "id": 1,
+            "nombre": "Agencia Nacional De Transito",
+            "descripcion": "ANT",
+            "url": "https://consultaweb.ant.gob.ec/PortalWEB/paginas/clientes/clp_criterio_consulta.jsp",
+            "imagen": "ant.jpg",
+            "estado": "A",
+            "created_at": "2023-11-30T09:06:53.000000Z",
+            "updated_at": "2023-11-30T09:06:53.000000Z",
+            "institucion_pais_ciudad": [
+                {
+                    "id": 1,
+                    "institucion_id": 1,
+                    "pais_id": 10,
+                    "provincia_id": 4,
+                    "ciudad_id": 2,
+                    "pais": {
+                        "id": 10,
+                        "nombre_pais": "Ecuador",
+                        "imagen": "ecuador.png",
+                        "estado": "A"
+                    },
+                    "provincia": {
+                        "id": 4,
+                        "pais_id": 10,
+                        "nombre_provincia": "Santa Elena",
+                        "estado": "A"
+                    },
+                    "ciudad": {
+                        "id": 2,
+                        "provincia_id": 4,
+                        "nombre_ciudad": "Salinas",
+                        "estado": "A"
+                    }
+                }
+            ]
+        },
+        {
+            "id": 2,
+            "nombre": "Comision De Transito Del Ecuador",
+            "descripcion": "CTE",
+            "url": "https://serviciosenlinea.comisiontransito.gob.ec/app_citaciones_consulta/",
+            "imagen": "cte.jpg",
+            "estado": "A",
+            "created_at": "2023-11-30T09:06:53.000000Z",
+            "updated_at": "2023-11-30T09:06:53.000000Z",
+            "institucion_pais_ciudad": [
+                {
+                    "id": 4,
+                    "institucion_id": 2,
+                    "pais_id": 10,
+                    "provincia_id": null,
+                    "ciudad_id": null,
+                    "pais": {
+                        "id": 10,
+                        "nombre_pais": "Ecuador",
+                        "imagen": "ecuador.png",
+                        "estado": "A"
+                    },
+                    "provincia": null,
+                    "ciudad": null
+                }
+            ]
+        },
+        {
+            "id": 3,
+            "nombre": "Agencia De Transito Y Movilidad De Guayaquil",
+            "descripcion": "ATM GUAYAQUIL",
+            "url": "https://consultas.atm.gob.ec/PortalWEB/paginas/clientes/clp_criterio_consulta.jsp",
+            "imagen": "atmgye.jpg",
+            "estado": "A",
+            "created_at": "2023-11-30T09:06:53.000000Z",
+            "updated_at": "2023-11-30T09:06:53.000000Z",
+            "institucion_pais_ciudad": [
+                {
+                    "id": 2,
+                    "institucion_id": 3,
+                    "pais_id": 10,
+                    "provincia_id": 5,
+                    "ciudad_id": 7,
+                    "pais": {
+                        "id": 10,
+                        "nombre_pais": "Ecuador",
+                        "imagen": "ecuador.png",
+                        "estado": "A"
+                    },
+                    "provincia": {
+                        "id": 5,
+                        "pais_id": 10,
+                        "nombre_provincia": "Guayas",
+                        "estado": "A"
+                    },
+                    "ciudad": {
+                        "id": 7,
+                        "provincia_id": 5,
+                        "nombre_ciudad": "Guayaquil",
+                        "estado": "A"
+                    }
+                }
+            ]
+        },
+        {
+            "id": 4,
+            "nombre": "Autoridad De Transito De Duran",
+            "descripcion": "ATD DURAN",
+            "url": "https://servicios.axiscloud.ec/AutoServicio/inicio.jsp?ps_empresa=22&ps_accion=P55#",
+            "imagen": "atdduran.jpg",
+            "estado": "A",
+            "created_at": "2023-11-30T09:06:53.000000Z",
+            "updated_at": "2023-11-30T09:06:53.000000Z",
+            "institucion_pais_ciudad": []
+        },
+        {
+            "id": 5,
+            "nombre": "Autoridad De Transito Mancomunidad Centro Guayas",
+            "descripcion": "ATM CENTRO GUAYAS",
+            "url": "https://servicios.axiscloud.ec/ConsultaInfracciones/paginas/ConsultaInfracciones.jsp?PS_EMPRESA=21",
+            "imagen": "atmcgye.jpg",
+            "estado": "A",
+            "created_at": "2023-11-30T09:06:53.000000Z",
+            "updated_at": "2023-11-30T09:06:53.000000Z",
+            "institucion_pais_ciudad": []
+        },
+        {
+            "id": 6,
+            "nombre": "Gobierno Autónomo Descentralizado De Ambato",
+            "descripcion": "GAD AMBATO",
+            "url": "https://gadmaapps.ambato.gob.ec:9001/apex/f?p=102:173:9126334272511:::173::",
+            "imagen": "gadamt.jpg",
+            "estado": "A",
+            "created_at": "2023-11-30T09:06:53.000000Z",
+            "updated_at": "2023-11-30T09:06:53.000000Z",
+            "institucion_pais_ciudad": []
+        },
+        {
+            "id": 7,
+            "nombre": "Autoridad De Transito Y Vigilancia De Samborondón",
+            "descripcion": "ATV SAMBORONDÓN",
+            "url": "https://www.atv.gob.ec/citacion/consulta/",
+            "imagen": "sbrdn.jpg",
+            "estado": "A",
+            "created_at": "2023-11-30T09:06:53.000000Z",
+            "updated_at": "2023-11-30T09:06:53.000000Z",
+            "institucion_pais_ciudad": []
+        },
+        {
+            "id": 8,
+            "nombre": "Empresa Pública De Movilidad",
+            "descripcion": "GAD IBARRA",
+            "url": "https://servicios.axiscloud.ec/AutoServicio/inicio.jsp?ps_empresa=02&ps_accion=P55",
+            "imagen": "ibarra.jpg",
+            "estado": "A",
+            "created_at": "2023-11-30T09:06:53.000000Z",
+            "updated_at": "2023-11-30T09:06:53.000000Z",
+            "institucion_pais_ciudad": []
+        },
+        {
+            "id": 9,
+            "nombre": "Agencia Metropolitana De Transito",
+            "descripcion": "AMT QUITO",
+            "url": "https://servicios.axiscloud.ec/AutoServicio/inicio.jsp?ps_empresa=03&ps_accion=P55",
+            "imagen": "amt_quito.jpg",
+            "estado": "A",
+            "created_at": "2023-11-30T09:06:53.000000Z",
+            "updated_at": "2023-11-30T09:06:53.000000Z",
+            "institucion_pais_ciudad": []
+        },
+        {
+            "id": 10,
+            "nombre": "Gobierno Autónomo Descentralizado De Manta",
+            "descripcion": "GAD MANTA",
+            "url": "https://servicios.axiscloud.ec/AutoServicio/inicio.jsp?ps_empresa=04&ps_accion=P55",
+            "imagen": "gadmanta.jpg",
+            "estado": "A",
+            "created_at": "2023-11-30T09:06:53.000000Z",
+            "updated_at": "2023-11-30T09:06:53.000000Z",
+            "institucion_pais_ciudad": []
+        },
+        {
+            "id": 11,
+            "nombre": "Empresa Pública Municipal De Transito Portovial",
+            "descripcion": "PORTOVIAL",
+            "url": "https://servicios.axiscloud.ec/AutoServicio/inicio.jsp?ps_empresa=05&ps_accion=P55",
+            "imagen": "portovial.jpg",
+            "estado": "A",
+            "created_at": "2023-11-30T09:06:53.000000Z",
+            "updated_at": "2023-11-30T09:06:53.000000Z",
+            "institucion_pais_ciudad": []
+        },
+        {
+            "id": 12,
+            "nombre": "Empresa Pública Municipal De Santo Domingo",
+            "descripcion": "EPMT-SD",
+            "url": "https://servicios.axiscloud.ec/AutoServicio/inicio.jsp?ps_empresa=06&ps_accion=P55",
+            "imagen": "epmt.jpg",
+            "estado": "A",
+            "created_at": "2023-11-30T09:06:53.000000Z",
+            "updated_at": "2023-11-30T09:06:53.000000Z",
+            "institucion_pais_ciudad": []
+        },
+        {
+            "id": 13,
+            "nombre": "Empresa Pública Municipal De Babahoyo",
+            "descripcion": "TRANSVIAL",
+            "url": "https://servicios.axiscloud.ec/AutoServicio/inicio.jsp?ps_empresa=07&ps_accion=P55",
+            "imagen": "transvial.jpg",
+            "estado": "A",
+            "created_at": "2023-11-30T09:06:53.000000Z",
+            "updated_at": "2023-11-30T09:06:53.000000Z",
+            "institucion_pais_ciudad": []
+        },
+        {
+            "id": 14,
+            "nombre": "Alcaldía Ciudadana De Riobamba",
+            "descripcion": "GAD RIOBAMBA",
+            "url": "https://servicios.axiscloud.ec/AutoServicio/inicio.jsp?ps_empresa=08&ps_accion=P55",
+            "imagen": "riobanba.jpg",
+            "estado": "A",
+            "created_at": "2023-11-30T09:06:53.000000Z",
+            "updated_at": "2023-11-30T09:06:53.000000Z",
+            "institucion_pais_ciudad": []
+        },
+        {
+            "id": 15,
+            "nombre": "Empresa Pública Municipal De Esmeraldas",
+            "descripcion": "ESVIAL",
+            "url": "https://servicios.axiscloud.ec/AutoServicio/inicio.jsp?ps_empresa=10&ps_accion=P55",
+            "imagen": "esvial.jpg",
+            "estado": "A",
+            "created_at": "2023-11-30T09:06:53.000000Z",
+            "updated_at": "2023-11-30T09:06:53.000000Z",
+            "institucion_pais_ciudad": [
+                {
+                    "id": 3,
+                    "institucion_id": 15,
+                    "pais_id": 10,
+                    "provincia_id": 1,
+                    "ciudad_id": 1,
+                    "pais": {
+                        "id": 10,
+                        "nombre_pais": "Ecuador",
+                        "imagen": "ecuador.png",
+                        "estado": "A"
+                    },
+                    "provincia": {
+                        "id": 1,
+                        "pais_id": 10,
+                        "nombre_provincia": "Esmeraldas",
+                        "estado": "A"
+                    },
+                    "ciudad": {
+                        "id": 1,
+                        "provincia_id": 1,
+                        "nombre_ciudad": "Atacames",
+                        "estado": "A"
+                    }
+                }
+            ]
+        },
+        {
+            "id": 16,
+            "nombre": "Empresa Pública Municipal De Pasaje",
+            "descripcion": "GAD PASAJE",
+            "url": "https://servicios.axiscloud.ec/AutoServicio/inicio.jsp?ps_empresa=11&ps_accion=P55",
+            "imagen": "ibarra.jpg",
+            "estado": "A",
+            "created_at": "2023-11-30T09:06:53.000000Z",
+            "updated_at": "2023-11-30T09:06:53.000000Z",
+            "institucion_pais_ciudad": []
+        },
+        {
+            "id": 17,
+            "nombre": "Municipio De Loja",
+            "descripcion": "GAD LOJA",
+            "url": "https://servicios.axiscloud.ec/AutoServicio/inicio.jsp?ps_empresa=14&ps_accion=P55",
+            "imagen": "gadloja.jpg",
+            "estado": "A",
+            "created_at": "2023-11-30T09:06:53.000000Z",
+            "updated_at": "2023-11-30T09:06:53.000000Z",
+            "institucion_pais_ciudad": []
+        },
+        {
+            "id": 18,
+            "nombre": "Comisión De Transito Del Ecuador - Ciudades",
+            "descripcion": "CTE CIUDADES",
+            "url": "https://servicios.axiscloud.ec/AutoServicio/inicio.jsp?ps_empresa=16&ps_accion=P55",
+            "imagen": "cteciud.jpg",
+            "estado": "A",
+            "created_at": "2023-11-30T09:06:53.000000Z",
+            "updated_at": "2023-11-30T09:06:53.000000Z",
+            "institucion_pais_ciudad": []
+        },
+        {
+            "id": 19,
+            "nombre": "Empresa Pública Municipal De Machala",
+            "descripcion": "MOVILIDAD MACHALA",
+            "url": "https://servicios.axiscloud.ec/AutoServicio/inicio.jsp?ps_empresa=17&ps_accion=P55",
+            "imagen": "mov.jpg",
+            "estado": "A",
+            "created_at": "2023-11-30T09:06:53.000000Z",
+            "updated_at": "2023-11-30T09:06:53.000000Z",
+            "institucion_pais_ciudad": []
+        },
+        {
+            "id": 20,
+            "nombre": "Empresa Pública Municipal De Latacunga",
+            "descripcion": "MOVILIDAD LATACUNGA",
+            "url": "https://servicios.axiscloud.ec/AutoServicio/inicio.jsp?ps_empresa=24&ps_accion=P55#",
+            "imagen": "g.jpg",
+            "estado": "A",
+            "created_at": "2023-11-30T09:06:53.000000Z",
+            "updated_at": "2023-11-30T09:06:53.000000Z",
+            "institucion_pais_ciudad": []
+        },
+        {
+            "id": 21,
+            "nombre": "Policia Civil De Guatemala",
+            "descripcion": "POLICIA CIVIL",
+            "url": "https://sistemas.transito.gob.gt/consultaremisiones/consultaremisiones",
+            "imagen": "polciudad.jpg",
+            "estado": "A",
+            "created_at": "2023-11-30T09:06:53.000000Z",
+            "updated_at": "2023-11-30T09:06:53.000000Z",
+            "institucion_pais_ciudad": []
+        },
+        {
+            "id": 22,
+            "nombre": "Policia Municipal De Transito Muniguate",
+            "descripcion": "MUNIGUATE",
+            "url": "http://especiales.muniguate.com/remisiones.htm",
+            "imagen": "ibarra.jpg",
+            "estado": "A",
+            "created_at": "2023-11-30T09:06:53.000000Z",
+            "updated_at": "2023-11-30T09:06:53.000000Z",
+            "institucion_pais_ciudad": []
+        },
+        {
+            "id": 23,
+            "nombre": "nombre de la institucion dos3",
+            "descripcion": "Descripción de la institución (opcional)",
+            "url": "http://www.ejemplo2.com",
+            "imagen": "nombre_de_imagen.png",
+            "estado": "A",
+            "created_at": "2023-11-30T21:55:18.000000Z",
+            "updated_at": "2023-11-30T21:55:18.000000Z",
+            "institucion_pais_ciudad": []
+        },
+        {
+            "id": 24,
+            "nombre": "Agencia Nacional de Pruebas",
+            "descripcion": "descripcionde prueba",
+            "url": "www.prueba.com.ec/search/",
+            "imagen": "imagen de pruebaaaaa",
+            "estado": "A",
+            "created_at": "2023-11-30T23:10:19.000000Z",
+            "updated_at": "2023-11-30T23:10:19.000000Z",
+            "institucion_pais_ciudad": []
+        }
+    ]
+}

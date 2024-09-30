@@ -1,0 +1,23 @@
+
+
+<div class="container row">
+    <div class="row">
+        <div class="col-sm-12 col-md-3 d-flex justify-content-center">
+            <strong> <mat-icon color="primary" class=" m-ic">error_outline</mat-icon> </strong>
+        </div>
+        <div class="col-sm-12 col-md-9 d-flex justify-content-center">
+            <h1 mat-dialog-title> ¿Inactivar un {{ titulo  | titlecase }}?</h1>
+        </div>
+      </div>
+   
+    <div class="col-md-12 d-flex justify-content-center">
+        <div class="mt-2">
+            Estás seguro de dar de baja al {{ titulo | titlecase }}, &nbsp; <span> <b> {{ datos | titlecase }}</b> </span> . 
+        </div>
+    </div>
+
+    <mat-dialog-actions align="center">
+        <button mat-button mat-dialog-close (click)="close()">Cancelar</button>
+        <button mat-button class="btn btn btn-outline-primary"  [mat-dialog-close]="id" cdkFocusInitial > Eliminar </button>
+    </mat-dialog-actions>
+</div>

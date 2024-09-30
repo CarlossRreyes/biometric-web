@@ -1,0 +1,75 @@
+<div class="container">
+  <h2 mat-dialog-title>Datos Personales</h2>
+
+  <form [formGroup]="formUsuario" class="example-form row mt-3">
+
+    <div class="col-12">
+      <div style="display: flex; justify-content: center; padding: 5px" class="mt-2">
+        <ngx-dropzone ngx-dropzone [accept]="'image/*'" [multiple]="false" (change)="onSelect($event)">
+          <ngx-dropzone-label class="custom-dropzone">
+            &nbsp; Ingrese una Imagen &nbsp;
+          </ngx-dropzone-label>
+          <ngx-dropzone-image-preview ngProjectAs="ngx-dropzone-preview" *ngFor="let f of files"
+            [file]="f" [removable]="true" (removed)="onRemove(f)">
+          </ngx-dropzone-image-preview>
+        </ngx-dropzone>
+      </div>
+    </div>
+
+   
+    <div class="col-md-6">
+      <mat-form-field class="example-full-width" appearance="outline">
+        <mat-label>Nombre</mat-label>
+        <input matInput formControlName="nombres" type="text" [ngClass]="{ 'is-invalid': fieldsValidate('nombres') }" appLetters>
+          <mat-error *ngIf="formUsuario.get('nombres')?.errors?.['required']"> El nombre es requerido. </mat-error>
+          <mat-error *ngIf="formUsuario.controls['nombres']?.errors?.['minlength']"> El nombre debe tener mínimo 3 caracteres. </mat-error> 
+      </mat-form-field>
+    </div>
+
+    <div class="col-md-6">
+      <mat-form-field class="example-full-width" appearance="outline">
+        <mat-label>Apellidos</mat-label>
+        <input matInput formControlName="apellidos" type="text" [ngClass]="{ 'is-invalid': fieldsValidate('apellidos') }" appLetters>
+          <mat-error *ngIf="formUsuario.get('apellidos')?.errors?.['required']"> El apellido es requerido. </mat-error>
+          <mat-error *ngIf="formUsuario.controls['apellidos']?.errors?.['minlength']"> El apellido debe tener mínimo 3 caracteres. </mat-error> 
+      </mat-form-field>
+    </div>
+
+    <div class="col-md-6">
+      <mat-form-field class="example-full-width" appearance="outline">
+        <mat-label>Correo</mat-label>
+        <input matInput formControlName="email" type="email" [ngClass]="{ 'is-invalid': fieldsValidate('email') }" appEmailValidation>
+        <mat-error *ngIf="formUsuario.get('email')?.errors?.['required']"> El correo es requerido. </mat-error>
+        <mat-error *ngIf="formUsuario.get('email')?.invalid"> El correo no tiene formato correcto. </mat-error>
+      </mat-form-field>
+    </div>
+
+    <div class="col-md-6">
+      <mat-form-field class="example-full-width" appearance="outline">
+        <mat-label>N° Celular</mat-label>
+        <input matInput formControlName="num_celular" maxlength="10" type="num_celular" appNumerosEcuadorPhone appNumericOnlyDirective 
+            [ngClass]="{ 'is-invalid': fieldsValidate('apellidos') }" >
+          <mat-error *ngIf="formUsuario.get('num_celular')?.errors?.['required']"> El número celular es requerido. </mat-error>
+          <mat-error *ngIf="formUsuario.controls['num_celular']?.errors?.['minlength']"> El número celular debe tener mínimo 10 caracteres. </mat-error>
+          <mat-error *ngIf="formUsuario.get('num_celular')?.errors?.['ecuadorianPhone']"> El número de celular ingresado no es válido. </mat-error>
+      </mat-form-field>
+    </div>
+
+    <div class="col-md-6">
+      <mat-form-field class="example-full-width" appearance="outline">
+        <mat-label>Dirección</mat-label>
+        <input matInput formControlName="direccion" type="text">
+      </mat-form-field>
+    </div>  
+  </form>
+  
+  <div class="row">
+    <mat-dialog-actions align="center">
+      <button mat-button mat-dialog-close class="d-grid" mat-flat-button (click)="close()">Cancelar</button>
+      <button mat-button [mat-dialog-close]="true" cdkFocusInitial class="d-grid" mat-flat-button color="primary"
+              [disabled]="formUsuario.invalid" (click)="updateSaveUsuario()">
+        {{ listadoSeleccionado ? "Actualizar" : "Registrar" }}
+      </button>
+    </mat-dialog-actions>
+  </div>
+</div>

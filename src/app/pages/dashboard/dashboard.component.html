@@ -1,0 +1,179 @@
+<app-breadcrumb [listaUrl]="listaUrl"></app-breadcrumb>
+
+<section class="section dashboard">
+    <div class="row">
+        <div class="col-lg-12">
+            <div class="row">
+                <div class="col-xxl-3 col-md-6" *ngFor="let item of listaCount">
+                    <div class="card info-card sales-card">
+                        <div class="card-body">
+                            <h1 class="card-title">{{item.nombre | titlecase}} </h1>
+                            <div class="d-flex align-items-center">
+                                <div class="card-icon rounded-circle d-flex align-items-center justify-content-center">
+                                    <i class="{{item.icono}}"></i>
+                                </div>
+                                <div class="ps-3 text-center">
+                                    <h6>{{item.cantidad}}</h6>
+                                </div>
+                            </div>
+                        </div>
+
+                    </div>
+                </div>
+            </div>
+
+            <div class="row">
+                <div class="col-12">
+                    <div class="card">
+
+                        <div class="card-body">
+                            <h1 class="card-title">Regresión lineal </h1>
+
+                            <div class="container">
+                                <form [formGroup]="formRegresionLineal">
+                                    <div class="row">
+                                        <div class="col col-lg-2">
+                                            <mat-form-field class="widthMatFormField" appearance="outline">
+                                                <mat-label>Fecha inicio</mat-label>
+                                                <input matInput formControlName="fechaInicio" type="date"
+                                                    [ngClass]="{ 'is-invalid': fieldsValidate('fechaInicio') }">
+                                                <mat-error
+                                                    *ngIf="formRegresionLineal.get('fechaInicio')?.errors?.['required']">
+                                                    La fecha de inicio es requerida. </mat-error>
+                                            </mat-form-field>
+                                        </div>
+
+                                        <div class="col col-lg-2">
+                                            <mat-form-field class="widthMatFormField" appearance="outline">
+                                                <mat-label>Fecha fin</mat-label>
+                                                <input matInput formControlName="fechaFin" type="date"
+                                                    [ngClass]="{ 'is-invalid': fieldsValidate('fechaFin') }">
+                                                <mat-error
+                                                    *ngIf="formRegresionLineal.get('fechaFin')?.errors?.['required']">
+                                                    La fecha final es requerida. </mat-error>
+                                            </mat-form-field>
+                                        </div>
+
+                                        <div class="col col-lg-3">
+                                            <mat-form-field class="widthMatFormField" appearance="outline">
+                                                <mat-label>Tipo asistencia</mat-label>
+                                                <mat-select formControlName="id"
+                                                    [ngClass]="{ 'is-invalid': fieldsValidate('id') }">
+                                                    <mat-option>-- Seleccione un tipo de asistencia--</mat-option>
+                                                    <mat-option *ngFor="let ta of listaTipoAsistencia" [value]="ta.id">
+                                                        {{ ta.type | titlecase }}</mat-option>
+                                                </mat-select>
+                                                <mat-error *ngIf="formRegresionLineal.get('id')?.errors?.['required']">
+                                                    El tipo de asistencia es requerido. </mat-error>
+                                            </mat-form-field>
+                                        </div>
+
+                                        <div class="col col-lg-3">
+                                            <mat-form-field class="widthMatFormField" appearance="outline">
+                                                <mat-label>Temporalidad</mat-label>
+                                                <mat-select formControlName="id_temp"
+                                                    [ngClass]="{ 'is-invalid': fieldsValidate('id_temp') }">
+                                                    <mat-option>-- Seleccione un tipo de temporalidad--</mat-option>
+                                                    <mat-option *ngFor="let temp of listaTemporalidad"
+                                                        [value]="temp.id_temp"> {{ temp.temporalidad | titlecase
+                                                        }}</mat-option>
+                                                </mat-select>
+                                                <mat-error
+                                                    *ngIf="formRegresionLineal.get('id_temp')?.errors?.['required']"> El
+                                                    tipo de temporalidad es requerido. </mat-error>
+                                            </mat-form-field>
+                                        </div>
+
+                                        <div class="col col-lg-2">
+                                            <button (click)="regresionLineal()" [disabled]="formRegresionLineal.invalid"
+                                                class="btn btn btn-outline-primary d-grid mt-2">
+                                                <i class="fa fa-plus"></i>Consultar
+                                            </button>
+                                        </div>
+                                    </div>
+                                </form>
+                            </div>
+
+                            
+                            <div class="col-md-12">
+                                <figure class="highcharts-figure">
+                                        <div id="container"></div>
+                                    </figure>
+                                </div>
+                            
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+
+            <div class="row">
+
+                <div class="col-12">
+                    <div class="card">
+                        <div class="filter">
+                            <a class="icon" href="#" data-bs-toggle="dropdown"><i class="bi bi-three-dots"></i></a>
+                            <ul class="dropdown-menu dropdown-menu-end dropdown-menu-arrow">
+                                <li class="dropdown-header text-start">
+                                    <h6>Temporalidad</h6>
+                                </li>
+
+                                <li><a class="dropdown-item" href="#">Día</a></li>
+                                <li><a class="dropdown-item" href="#">Mes</a></li>
+                                <li><a class="dropdown-item" href="#">Año</a></li>
+                            </ul>
+                        </div>
+                        <div class="card-body">
+                            <h1 class="card-title">Tendecias de Asistencias </h1>
+                            <div>
+                                <canvas id="myChart"
+                                    style="min-height: 250px; height: 250px; max-height: 300px; max-width: 100%; margin-top: 22px"></canvas>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="col-xxl-6 col-md-6">
+                    <div class="card">
+                    
+                        <div class="card-body pb-0">
+                            <h5 class="card-title">Total de Horas Extras por Departamento  <span>| KPI</span></h5>
+                        
+                            <div id="chartDiv" style="max-width: 475px;height: 350px;margin: 0px auto"> </div>
+                        </div>
+                    </div>
+
+                </div>
+
+                <div class="col-xxl-6 col-md-6">
+                    <div class="card">
+                        <div class="filter">
+                            <a class="icon" href="#" data-bs-toggle="drodown"><i class="bi bi-three-dots"></i></a>
+                            <ul class="dropdown-menu dropdown-menu-end dropdown-menu-arrow">
+                                <li class="dropdownh-eader text-start">
+                                    <h6>Filter</h6>
+                                </li>
+
+                                <li><a class="dropdown-item" href="#">Today</a></li>
+                                <li><a class="dropdown-item" href="#">This Month</a></li>
+                                <li><a class="dropdown-item" href="#">This Year</a></li>
+                            </ul>
+                        </div>
+
+                        <div class="card-body pb-0">
+                            <h5 class="card-title">Budget Report <span>| KPI</span></h5>
+
+                            <div>
+                                <canvas id="myChart3"
+                                    style="min-height: 300px; height: 300px; max-height: 300px; max-width: 100%; margin-top: 22px"></canvas>
+                            </div>
+
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+    </div>
+</section>
+

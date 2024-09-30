@@ -1,0 +1,23 @@
+<div class="container">
+    <h2 mat-dialog-title>EMPRESA</h2>
+    <div class="col-12">
+        <div style="display: flex; justify-content: center; padding: 5px" class="mt-2">
+          <ngx-dropzone ngx-dropzone [accept]="'image/*'" [multiple]="false" (change)="onSelect($event)">
+            <ngx-dropzone-label class="custom-dropzone">
+              &nbsp; Ingrese una Imagen &nbsp;
+            </ngx-dropzone-label>
+            <ngx-dropzone-image-preview ngProjectAs="ngx-dropzone-preview" *ngFor="let f of files"
+              [file]="f" [removable]="true" (removed)="onRemove(f)">
+            </ngx-dropzone-image-preview>
+          </ngx-dropzone>
+        </div>
+      </div>
+      <div class="col-md-6">
+        <mat-form-field class="example-full-width" appearance="outline">
+          <mat-label>Nombre</mat-label>
+          <input matInput formControlName="nombres" type="text" [ngClass]="{ 'is-invalid': fieldsValidate('nombres') }" appLetters>
+            <mat-error *ngIf="formEmpresa.get('nombres')?.errors?.['required']"> El nombre es requerido. </mat-error>
+            <mat-error *ngIf="formEmpresa.controls['nombres']?.errors?.['minlength']"> El nombre debe tener mínimo 3 caracteres. </mat-error> 
+        </mat-form-field>
+      </div>
+</div>
